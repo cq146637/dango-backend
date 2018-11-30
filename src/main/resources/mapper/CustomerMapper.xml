@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dango.core.dao.CustomerMapper">
+  <resultMap id="BaseResultMap" type="com.dango.common.pojo.po.CustomerDO">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="real_name" jdbcType="VARCHAR" property="realName" />
+    <result column="identity_card" jdbcType="VARCHAR" property="identityCard" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="balance" jdbcType="VARCHAR" property="balance" />
+    <result column="photo" jdbcType="VARCHAR" property="photo" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, username, password, real_name, identity_card, phone, balance, photo, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from customer
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from customer
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.dango.common.pojo.po.CustomerDO">
+    insert into customer (id, username, password, 
+      real_name, identity_card, phone, 
+      balance, photo, create_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{realName,jdbcType=VARCHAR}, #{identityCard,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{balance,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.dango.common.pojo.po.CustomerDO">
+    insert into customer
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="realName != null">
+        real_name,
+      </if>
+      <if test="identityCard != null">
+        identity_card,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="balance != null">
+        balance,
+      </if>
+      <if test="photo != null">
+        photo,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null">
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="identityCard != null">
+        #{identityCard,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="balance != null">
+        #{balance,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null">
+        #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dango.common.pojo.po.CustomerDO">
+    update customer
+    <set>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null">
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="identityCard != null">
+        identity_card = #{identityCard,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="balance != null">
+        balance = #{balance,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null">
+        photo = #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dango.common.pojo.po.CustomerDO">
+    update customer
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      real_name = #{realName,jdbcType=VARCHAR},
+      identity_card = #{identityCard,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      balance = #{balance,jdbcType=VARCHAR},
+      photo = #{photo,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="getByUsername" resultType="com.dango.common.pojo.po.CustomerDO">
+    select
+    <include refid="Base_Column_List"/>
+    from customer
+    where username = #{username}
+  </select>
+  <select id="getByUsernameAndPassword" resultType="com.dango.common.pojo.po.CustomerDO">
+      select
+      <include refid="Base_Column_List"/>
+      from customer
+      where username = #{username} and password = #{password}
+  </select>
+
+  <update id="insertBalance" >
+      update customer
+      set
+      balance = #{balance,jdbcType=VARCHAR}
+      where id = #{id}
+  </update>
+
+  <select id="selectAll" resultType="com.dango.common.pojo.po.CustomerDO">
+    select
+    <include refid="Base_Column_List"/>
+    from customer
+  </select>
+
+
+    <insert id="insertCustomer" parameterType="com.dango.common.pojo.po.CustomerDO">
+        insert into customer ( username, password,
+                              real_name, identity_card, phone
+                )
+        values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+                #{real_name,jdbcType=VARCHAR}, #{identity_card,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}
+                       )
+    </insert>
+
+    <update id="updateCustomer" parameterType="com.dango.common.pojo.po.CustomerDO">
+        update customer
+        set
+            real_name = #{real_name,jdbcType=VARCHAR},
+            identity_card = #{identity_card,jdbcType=VARCHAR},
+            phone = #{phone,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+</mapper>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dango.core.dao.OrderInfoViewMapper">
+  <resultMap id="BaseResultMap" type="com.dango.common.pojo.vo.OrderInfoVO">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="standard_id" jdbcType="BIGINT" property="standardId" />
+    <result column="standard_name" jdbcType="BIGINT" property="standardName" />
+    <result column="room_id" jdbcType="BIGINT" property="roomId" />
+    <result column="label" jdbcType="BIGINT" property="roomLabel" />
+    <result column="customer_id" jdbcType="BIGINT" property="customerId" />
+    <result column="real_name" jdbcType="BIGINT" property="customerRealName" />
+    <result column="identity_card" jdbcType="BIGINT" property="customerIdentityCard" />
+    <result column="phone" jdbcType="BIGINT" property="customerPhone" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, standard_id, standard_name, room_id, label, customer_id, real_name, identity_card, phone, start_time, end_time, status, create_time
+  </sql>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order_info_view
+  </select>
+</mapper>

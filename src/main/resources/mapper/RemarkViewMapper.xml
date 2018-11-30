@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dango.core.dao.RemarkViewMapper">
+  <resultMap id="BaseResultMap" type="com.dango.common.pojo.vo.RemarkVO">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="order_info_id" jdbcType="BIGINT" property="orderInfoId" />
+    <result column="real_name" jdbcType="BIGINT" property="customerRealName" />
+    <result column="standard_id" jdbcType="BIGINT" property="standardId" />
+    <result column="name" jdbcType="BIGINT" property="standardName" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, order_info_id, real_name, standard_id, name, content, create_time
+  </sql>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from remark_view
+  </select>
+</mapper>
